@@ -1,0 +1,38 @@
+<!--
+<p *ngIf=" user.age >= 18"  >{{user.name}}</p>
+<div *ngIf="user.age < 18">
+  You are younger
+</div>
+
+-->
+<p *ngIf = "user.age >= 18; else under18">{{user.name}}</p>
+
+<!--
+  <p [hidden] = "user.age < 18">{{user.name}}</p>
+-->
+<ng-template #under18>
+  <div> You are younger </div>
+</ng-template>
+
+<button (click)="user.age = user.age -1 ">-</button>
+Age: {{user.age}}
+<button (click)="user.age = user.age +1 ">+</button>
+<ul>
+  <li *ngFor="let u of list; index as idx; count as total; first as isFirst;
+  last as isLast; even as isEven; odd as isOdd">
+  <ng-container *ngIf="u.id > 3; else under3">
+  <span>{{u.id}}-{{u.name}} </span>
+  <br>
+  <span>index {{idx}} out of {{total}}</span>
+  <br>
+  <span *ngIf="isEven">i am even number</span>
+  <span *ngIf="isOdd">i am odd number</span>
+  <br>
+  <span *ngIf="isFirst">i am first</span>
+  <span *ngIf="isLast">i am last</span>
+</ng-container>
+<ng-template #under3>
+   None display
+</ng-template>
+</li>
+</ul>
